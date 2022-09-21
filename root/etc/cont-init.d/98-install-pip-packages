@@ -1,0 +1,16 @@
+#!/usr/bin/with-contenv bash
+
+# Exit if no installable packages are provided
+if [ -z ${INSTALL_PIP_PACKAGES+x} ]; then
+    echo "**** No packages to install ****"
+    exit 0
+fi
+
+
+#Split list of packages on delimiter '|'
+IFS='|'
+INSTALL_PIP_PACKAGES=(${INSTALL_PIP_PACKAGES})
+for PKG in "${INSTALL_PIP_PACKAGES[@]}"; do
+    echo "**** Adding ${PKG} to install list ****"
+    echo "${PKG}" >> /mod-pip-packages-to-install.list
+done
